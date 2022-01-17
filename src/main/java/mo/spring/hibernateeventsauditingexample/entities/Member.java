@@ -1,6 +1,8 @@
 package mo.spring.hibernateeventsauditingexample.entities;
 
 import mo.spring.hibernateeventsauditingexample.mo_traceability.entities_listeners.implementations.MemberEntityListner;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "members")
 @EntityListeners(MemberEntityListner.class)
+@Audited
 public class Member {
 
     private Long id;
@@ -63,6 +66,7 @@ public class Member {
     }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @NotAudited
     public Set<Address> getAddresses() {
         return addresses;
     }

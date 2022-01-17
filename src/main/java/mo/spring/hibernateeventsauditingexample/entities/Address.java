@@ -2,6 +2,8 @@ package mo.spring.hibernateeventsauditingexample.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import mo.spring.hibernateeventsauditingexample.mo_traceability.entities_listeners.implementations.AddressEntityListner;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "addresses")
 @EntityListeners(AddressEntityListner.class)
+@Audited
 public class Address {
     private Long id;
     private String street1;
@@ -85,6 +88,7 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @NotAudited
     public Member getMember() {
         return member;
     }
